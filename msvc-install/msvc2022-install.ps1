@@ -141,7 +141,7 @@ function Install {
     $installer = "$download_path/$version/installer.exe"
 
     New-Item -ItemType Directory -Force "$full_install_root/$version"
-    Start-Process -Wait -FilePath "$installer" -ArgumentList @("--installPath", "$full_install_root/$version", "--add", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64", "--add", "Microsoft.VisualStudio.Component.VC.Tools.ARM64", "--add", "Microsoft.VisualStudio.Component.VC.Tools.ARM")
+    Start-Process -FilePath "$installer" -ArgumentList @("--quiet", "--norestart", "--wait", "--installPath", "$full_install_root/$version", "--add", "Microsoft.VisualStudio.Component.VC.Tools.x86.x64", "--add", "Microsoft.VisualStudio.Component.VC.Tools.ARM64", "--add", "Microsoft.VisualStudio.Component.VC.Tools.ARM") -Wait
 }
 
 function Uninstall {
@@ -151,7 +151,7 @@ function Uninstall {
 
     $installer = "$download_path/$version/installer.exe"
 
-    Start-Process -Wait -FilePath "$installer" -ArgumentList @("uninstall", "--wait", "--passive", "--installPath", "$full_install_root/$version")
+    Start-Process -FilePath "$installer" -ArgumentList @("uninstall", "--quiet", "--norestart", "--wait", "--installPath", "$full_install_root/$version") -Wait
 
     Remove-Item -Recurse -Force "$full_install_root/$version"
 }
