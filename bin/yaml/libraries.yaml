@@ -195,9 +195,15 @@ libraries:
       # Remove tests and test dependencies
       - find . -name "*.t.*" -exec rm -f {} ";"
       - sed -i 's/add_subdirectory(standalones)//g' CMakeLists.txt
+      after_stage_script_pwsh:
+      - Get-ChildItem -Recurse -Filter "*.t.*" | Remove-Item -Force
+      - (Get-Content CMakeLists.txt) -replace 'add_subdirectory\(standalones\)', '' | Set-Content CMakeLists.txt
       prebuild_script:
       - curl -o bde-tools.zip -L https://github.com/bloomberg/bde-tools/archive/refs/heads/main.zip
       - unzip -q bde-tools.zip
+      prebuild_script_pwsh:
+      - Invoke-WebRequest -Uri "https://github.com/bloomberg/bde-tools/archive/refs/heads/main.zip" -OutFile "bde-tools.zip"
+      - Expand-Archive -Path "bde-tools.zip" -DestinationPath "." -Force
       extra_cmake_arg:
       - -DBdeBuildSystem_ROOT:PATH=bde-tools-main/BdeBuildSystem/
       - -DBBS_ENV_MARKER=ON
@@ -954,6 +960,8 @@ libraries:
       - 4.6.01
       - 4.6.02
       - 4.7.00
+      - 4.7.01
+      - 5.0.0
       type: github
     kumi:
       check_file: README.md
@@ -2360,6 +2368,7 @@ libraries:
       - v9.0.0
       - v10.0.1
       - v10.2.0
+      - v11.0.2
       type: github
     raberu:
       check_file: README.md
