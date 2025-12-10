@@ -149,11 +149,18 @@ function Uninstall {
         [string] $version
     )
 
-    $installer = "$download_path/$version/installer.exe"
-
-    Start-Process -FilePath "$installer" -ArgumentList @("uninstall", "--quiet", "--norestart", "--wait", "--installPath", "$full_install_root/$version") -Wait
-
-    Remove-Item -Recurse -Force "$full_install_root/$version"
+	# Don't uninstall for now.  The 2019 version can't be uninstalled so we are going to switch to the InstallCleanup tool.
+    #
+	# The official Visual Studio cleanup tool is InstallCleanup.exe, found in the Installer folder (e.g., C:\Program Files (x86)\Microsoft Visual Studio\Installer\InstallCleanup.exe). Use it as a 
+	# last resort with InstallCleanup.exe -full in an admin command prompt to remove all traces if repairs fail, or InstallCleanup.exe -i <version_number> (like -i 17 for VS 2022) to remove specific
+	# versions. It's designed to clear corrupted installations before reinstalling.
+	#
+	#
+    # $installer = "$download_path/$version/installer.exe"
+    #
+    # Start-Process -FilePath "$installer" -ArgumentList @("uninstall", "--quiet", "--norestart", "--wait", "--installPath", "$full_install_root/$version") -Wait
+    #
+    # Remove-Item -Recurse -Force "$full_install_root/$version"
 }
 
 function ZipVC {
