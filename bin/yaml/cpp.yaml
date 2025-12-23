@@ -1656,6 +1656,7 @@ compilers:
           - contracts-base-trunk
           - contracts-GNUext-trunk
           - thomas-healy-trunk
+          - trivial-relocation-trunk
       clang:
         type: nightly
         check_exe: bin/clang++ --version
@@ -1692,6 +1693,7 @@ compilers:
           - p3385-trunk
           - p3412-trunk
           - p3776-trunk
+          - hana-clang-trunk
           - implicit-constexpr-trunk
           - dascandy-contracts-trunk
           - p1974-trunk
@@ -1708,6 +1710,12 @@ compilers:
       tinycc:
         type: nightly
         check_exe: bin/tcc -v
+        targets:
+          - trunk
+      ncc-ng:
+        type: nightly
+        compiler_name: ncc-ng-{{name}}
+        check_exe: bin/n++ -help
         targets:
           - trunk
       6502-c++:
