@@ -1,5 +1,5 @@
 locals {
-  runner_image_id        = "ami-05dfe5a5c6bebfead"
+  runner_image_id        = "ami-05d4fb32368117b54"
   conan_image_id         = "ami-0b41dc7a318b530bd"
   smbserver_image_id     = "ami-01e7c7963a9c4755d"
   smbtestserver_image_id = "ami-0284c821376912369"
@@ -19,8 +19,8 @@ resource "aws_instance" "AdminNode" {
   source_dest_check           = true
 
   root_block_device {
-    volume_type           = "gp2"
-    volume_size           = 40
+    volume_type           = "gp3"
+    volume_size           = 100
     delete_on_termination = false
   }
 
