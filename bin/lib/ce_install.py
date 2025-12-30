@@ -371,7 +371,7 @@ def squash_mount_check(rootfolder: Path, subdir: str, context: CliContext) -> in
 @click.option(
     "--parallel",
     type=int,
-    default=min(8, multiprocessing.cpu_count()),
+    default=max(8, multiprocessing.cpu_count()),
     help="Limit the number of concurrent processes to N",
     metavar="N",
     show_default=True,
